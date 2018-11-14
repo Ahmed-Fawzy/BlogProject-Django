@@ -1,0 +1,38 @@
+
+{% extends 'base_panel.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+    {% if posts %}
+        {% for post in posts %}
+
+            <div class="card" >
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body|truncatewords:50 }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">By {{post.author}} at {{post.created_at}}</h6>
+
+
+                {% for perm in permis %}
+
+                    {% if perm.permi_type == 'Update' %}
+                        <a href="/panel/update/{{post.id}}" class="btn btn-primary">Edit</a>
+                    {% endif %}
+                    {% if perm.permi_type == 'Delete' %}
+                        <a href="/panel/delete/{{post.id}}" class="btn btn-primary">Delete</a>
+                    {% endif %}
+                {% endfor %}
+
+              </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>You don't have Permission to view the unpublished posts</p>
+    {% endif %}
+
+
+{% endblock %}

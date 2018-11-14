@@ -1,0 +1,35 @@
+
+{% extends 'base_panel.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    {% if msg %}
+    <p>{{msg}}</p>
+    {% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+    <form method="post" action="{% url 'save or publish post' %}"  >
+        {% csrf_token %}
+        {{ post_form|crispy }}
+        <br>
+        <input type="submit" value="Save" name="Save" size="25" class="btn btn-info"/>
+
+        {% for perm in permis %}
+
+            {% if perm.permi_type == 'Publish' %}
+
+                <input type="submit" value="Publish" name="Publish" size="25" class="btn btn-primary"/>
+            {% endif %}
+        {% endfor %}
+
+    </form>
+
+
+
+{% endblock %}

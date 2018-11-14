@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <br><br>
+    {% for post in posts %}
+
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body|truncatewords:30 }}</p>
+
+                {% if post.recommended == False %}
+                    <a href="/panel/recommend/{{post.id}}" class="btn btn-primary">Recommend</a>
+                {% else %}
+                    <a href="/panel/recommend/{{post.id}}" class="btn btn-primary">UnRecommend</a>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+    {% endfor %}
+
+
+
+
+<!--
+    <form method="post" action="/">
+        {% csrf_token %}
+        {{ login_form|crispy }}
+        <input type="submit" value="log in" name="Login" size="25" class="btn btn-info"/>
+
+    </form>
+-->
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+
+from .forms import Login_Form
+from .models import User, Permission
+
+from django.contrib.auth.decorators import login_required
+
+# Create your views here.
+def Login(request):
+
+    if request.method == 'POST':
+
+        if 'Login' in request.POST:
+
+            login_form = Login_Form(request.POST)
+
+            if login_form.is_valid():
+
+
+                user_name = login_form.cleaned_data['user_name']
+                user_pass = login_form.cleaned_data['user_pass']
+
+
+                return HttpResponseRedirect('blog/')
+
+
+    login_form = Login_Form()
+    context = {'login_form': login_form}
+
+    return render(request, 'login.html', context)
+
+
+@login_required(login_url='/')
+def Home(request):
+    print('here')
+    return HttpResponse('aaa')

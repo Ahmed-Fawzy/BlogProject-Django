@@ -1,0 +1,28 @@
+
+{% extends 'base_panel.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    {% if posts %}
+        {% for post in posts %}
+
+            <div class="card" >
+              <div class="card-body">
+                <h2 class="card-title">{{post.title}}</h2>
+                <h6 class="card-subtitle mb-2 text-muted">By {{post.author}} at {{post.created_at}}</h6>
+                <p class="card-text">{{post.body|truncatewords:30}}</p>
+
+                <a href="/panel/update/{{post.id}}" class="btn btn-primary">Edit</a>
+
+              </div>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <p>You don't have Permission to view the unpublished posts</p>
+    {% endif %}
+
+
+{% endblock %}

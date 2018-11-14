@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+    {% for po in post %}
+
+
+
+    <div class="card" >
+      <div class="card-body">
+        <h2 class="card-title">{{po.title}}</h2>
+        <h6 class="card-subtitle mb-2 text-muted">By {{po.author}} at {{po.created_at}}</h6>
+        <p class="card-text">{{po.body}}</p>
+      </div>
+    </div>
+
+
+    {% endfor %}
+
+
+{% endblock %}
