@@ -32,11 +32,11 @@ urlpatterns = [
 
     path('panel/view/', views.Panel, name='View'),
 
-    path('panel/create', views.create, name='create post'),
+    path('panel/create/', views.create, name='create post'),
 
     path('panel/save', views.save_publish_post, name='save or publish post'),
 
-    path('panel/update', views.update, name='update'),
+    path('panel/update/', views.update, name='update'),
 
     path('panel/update/<int:post_id>', views.update_post, name='update post'),
 
@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('panel/delete/<int:post_id>', views.delete_post, name='delete post'),
 
-    path('panel/publish', views.publish, name='publish page'),
+    path('panel/publish/', views.publish, name='publish page'),
 
     path('panel/publish/<int:post_id>', views.publish_post, name='publish'),
 

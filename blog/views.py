@@ -8,7 +8,7 @@ from .models import User, Permission, Post
 
 
 from django.contrib import messages
-
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 def Login(request):
@@ -48,7 +48,7 @@ def Panel(request):
         permis = us.permission.all()
 
 
-        if us.permission.get(permi_type='Create'):
+        if us.permission.filter(permi_type='View'):
             posts = Post.objects.filter(published=False)
             context = {'permis': permis, 'posts': posts}
         else:
@@ -70,7 +70,7 @@ def create(request):
         us = User.objects.get(id=m_id)
         permis = us.permission.all()
 
-        if us.permission.get(permi_type='Create'):
+        if us.permission.filter(permi_type='Create'):
             post_form =Post_Form()
             context = {'post_form': post_form, 'permis': permis}
 
@@ -95,7 +95,7 @@ def update(request):
         permis = us.permission.all()
 
 
-        if us.permission.get(permi_type='Update'):
+        if us.permission.filter(permi_type='Update'):
             posts = Post.objects.all()
             context = {'permis': permis, 'posts': posts}
         else:
@@ -119,7 +119,7 @@ def update_post(request,post_id):
 
         post = Post.objects.get(pk=post_id)
 
-        if us.permission.get(permi_type='Create'):
+        if us.permission.filter(permi_type='Create'):
 
             post_form = Post_Form(initial={'title': post.title, 'body': post.body})
 
@@ -190,7 +190,7 @@ def delete_page(request):
         us = User.objects.get(id=m_id)
         permis = us.permission.all()
 
-        if us.permission.get(permi_type='Delete'):
+        if us.permission.filter(permi_type='Delete'):
             posts = Post.objects.all()
             context = {'permis': permis, 'posts': posts}
         else:
@@ -221,7 +221,7 @@ def publish(request):
         us = User.objects.get(id=m_id)
         permis = us.permission.all()
 
-        if us.permission.get(permi_type='Delete'):
+        if us.permission.filter(permi_type='Delete'):
             posts = Post.objects.all()
             context = {'permis': permis, 'posts': posts}
         else:
@@ -255,7 +255,7 @@ def Recommend(request):
         us = User.objects.get(id=m_id)
         permis = us.permission.all()
 
-        if us.permission.get(permi_type='Recommend'):
+        if us.permission.filter(permi_type='Recommend'):
 
             context = {'permis': permis, 'posts': posts}
         else:
@@ -305,7 +305,7 @@ def Add_User(request):
         us = User.objects.get(id=m_id)
         permis = us.permission.all()
 
-        if us.permission.get(permi_type='Create'):
+        if us.permission.filter(permi_type='Create'):
             add_user_form = Add_User_Form()
             context = {'add_user_form': add_user_form, 'permis': permis}
 
@@ -356,6 +356,7 @@ def login(request):
             if m.user_pass == request.POST['user_pass']:
                 request.session['member_id'] = m.id
                 request.session['member_name'] = m.user_name
+
                 return HttpResponseRedirect('/')
 
             #                return HttpResponse("You're logged in.")

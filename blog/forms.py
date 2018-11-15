@@ -32,10 +32,11 @@ class Post_Form(forms.ModelForm):
 class Add_User_Form(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['user_name', 'user_pass', 'permission']
-        labels = {'user_name': 'Username', 'user_pass': 'Password', 'permission':'Permission'}
+        fields = ['user_name', 'user_pass', 'user_email', 'permission']
+        labels = {'user_name': 'Username', 'user_pass': 'Password', 'user_email':'Email' , 'permission':'Permission'}
         widgets = {'user_name': forms.TextInput(attrs= {'placeholder': 'Username',"class":"form-control" }),
                     'user_pass': forms.PasswordInput(attrs={'placeholder': 'Password',"class":"form-control" }),
+                   'user_email': forms.TextInput(attrs={'placeholder': 'Email', "class": "form-control"}),
                     'permission': forms.SelectMultiple(attrs={"class":"form-control col-4"})
 
 
