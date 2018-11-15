@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import Login_Form, Post_Form, Add_User_Form
 from .models import User, Permission, Post
 
-#from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
@@ -15,19 +14,6 @@ from django.contrib import messages
 def Login(request):
 
     posts = Post.objects.filter(published=True)
-
-
-
-#            if login_form.is_valid():
-#                print('here')
-#                user_name = login_form.cleaned_data['user_name']
-#                user_pass = login_form.cleaned_data['user_pass']
-
-#                print(user_name)
-#                print(user_pass)
-
-#                return HttpResponseRedirect('blog/')
-
 
     login_form = Login_Form()
     context = {'login_form': login_form, 'posts': posts}
@@ -40,7 +26,7 @@ def Show_Post(request, post_id):
     context = {'post': post}
     return render(request, 'post.html', context)
 
-#@login_required
+
 def Home(request):
 
     posts = Post.objects.filter(published=True)
