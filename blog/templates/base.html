@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-
+{{request.resolver_match.url_name}}
 
 <!doctype html>
 <html lang="en">
@@ -23,16 +23,16 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsingNavbar">
       <ul class="navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item {% if request.resolver_match.url_name == 'Login Page' %}active{% endif %}">
           <a class="nav-link" href="{% url 'Login Page' %}">Home <span class="sr-only">(current)</span></a>
         </li>
 
         {% if request.session.member_id %}
-        <li class="nav-item">
+        <li class="nav-item {% if request.resolver_match.url_name == 'Panel' %}active{% endif %}">
           <a class="nav-link" href="{% url 'Panel' %}">Panel</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/recommended">Recommended</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'Recommended' %}active{% endif %}" href="/recommended">Recommended</a>
         </li>
         {% endif %}
       </ul>

@@ -12,7 +12,7 @@
         <div class="card-body">
             <h3>Permissions</h3>
             {% for perm in permis %}
-                <a class="btn btn-primary col-7" href="/panel/{{perm|lower}}">{{perm}}</a>
+                <a class="btn btn-primary col-7  {% if perm|lower in request.resolver_match.url_name %}active btn-success{% endif %}  " href="/panel/{{perm|lower}}">{{perm}}</a>
                 <br><br>
             {% endfor %}
         </div>
