@@ -233,8 +233,6 @@ def publish(request):
         return HttpResponseRedirect('panel/')
 
 
-    #return render(request, 'publish.html', context={'posts': posts})
-
 
 def publish_post(request, post_id):
     post = Post.objects.get(pk =post_id )
@@ -290,7 +288,6 @@ def recommend_post(request, post_id):
 
 def Show_Recommended(request):
     posts = Post.objects.filter(recommended=True)
-
 
     return render(request, 'login.html', context={'posts':posts})
 
@@ -359,7 +356,6 @@ def login(request):
 
                 return HttpResponseRedirect('/')
 
-            #                return HttpResponse("You're logged in.")
             else:
                 return HttpResponse("Your username and password didn't match.")
 

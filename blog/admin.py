@@ -13,4 +13,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Permission)
 admin.site.register(Post)
 
-#admin.site.register(manage,ManageAdmin)
+

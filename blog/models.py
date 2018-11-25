@@ -40,12 +40,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-#class Manage(models.Model):
-
-#    user = models.ManyToManyField(User,unique=True)
-
-#    permit = models.ManyToManyField(Permission)
-
-#    def __str__(self):
-#        return self.user
